@@ -1,3 +1,11 @@
+# Danbi AI - AI 기반 다국어 학습 플랫폼 / AI-Powered Multilingual Learning Platform
+
+> **Language / 언어**: [한국어](#한국어) | [English](#english)
+
+---
+
+## 한국어
+
 # Danbi AI - AI 기반 다국어 학습 플랫폼
 
 AI 기반 다국어 플래시카드 학습 서비스. SM-2 알고리즘과 OpenAI GPT-4o mini를 사용한 효율적인 학습 플랫폼입니다.
@@ -187,3 +195,197 @@ pnpm start
 ## 지원
 
 문제가 발생한 경우, Issue를 생성해주세요.
+
+---
+
+## English
+
+# Danbi AI - AI-Powered Multilingual Learning Platform
+
+An AI-powered multilingual flashcard learning service. An efficient learning platform using the SM-2 algorithm and OpenAI GPT-4o mini.
+
+## Key Features
+
+- 🤖 **AI Generation**: Automatic card generation using OpenAI GPT-4o mini
+- 📚 **SM-2 Algorithm**: Scientifically proven spaced repetition learning method
+- 🎴 **Interactive Learning**: Beautiful UI with smooth animations
+- 📊 **Statistics Dashboard**: Track learning progress and review statistics
+- 💳 **Subscription Service**: Free/Standard plan support
+- 🌙 **Dark Mode**: Light/Dark theme support
+- 📱 **Mobile Optimized**: Responsive design
+- 🌍 **Multilingual Support**: Korean, Japanese, and English UI support
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **UI**: React 19, shadcn/ui, Tailwind CSS
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
+- **AI**: OpenAI GPT-4o mini
+- **Animation**: Framer Motion
+- **Forms**: React Hook Form + Zod
+- **Theme**: next-themes
+- **Internationalization**: next-intl
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- pnpm (recommended) or npm/yarn
+- Supabase account
+- OpenAI API key
+- Stripe account
+
+### 1. Clone Repository
+
+```bash
+git clone <repository-url>
+cd danbi-ai
+```
+
+### 2. Install Dependencies
+
+```bash
+pnpm install
+```
+
+### 3. Environment Variables
+
+Create a `.env.local` file and set the following environment variables:
+
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+
+# OpenAI
+OPENAI_API_KEY=your_openai_api_key
+
+# Stripe
+STRIPE_SECRET_KEY=your_stripe_secret_key
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
+STRIPE_PRICE_ID=your_stripe_price_id
+```
+
+For more details, refer to the [Environment Variables](#environment-variables) section.
+
+### 4. Database Setup
+
+Run the following migration files in order from the Supabase dashboard:
+
+1. `supabase/migrations/001_create_profiles.sql`
+2. `supabase/migrations/002_create_decks.sql`
+3. `supabase/migrations/003_create_cards.sql`
+4. `supabase/migrations/004_add_stripe_subscriptions.sql`
+5. `supabase/migrations/005_add_last_ai_deck_generation.sql`
+6. `supabase/migrations/006_add_cards_deck_review_index.sql`
+7. `supabase/migrations/007_add_language_support.sql`
+8. `supabase/migrations/008_fix_learning_languages_default.sql`
+9. `supabase/migrations/009_add_deck_ui_language.sql`
+
+Or use Supabase CLI:
+
+```bash
+supabase db push
+```
+
+### 5. Run Development Server
+
+```bash
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Environment Variables
+
+### Required Environment Variables
+
+| Variable Name                   | Description                          | How to Obtain                                           |
+| ------------------------------- | ------------------------------------ | ------------------------------------------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL`      | Supabase project URL                 | Supabase Dashboard > Settings > API                     |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anonymous key               | Supabase Dashboard > Settings > API                     |
+| `SUPABASE_SERVICE_ROLE_KEY`     | Supabase service role key            | Supabase Dashboard > Settings > API                     |
+| `OPENAI_API_KEY`                | OpenAI API key                       | [OpenAI Platform](https://platform.openai.com/api-keys) |
+| `STRIPE_SECRET_KEY`             | Stripe Secret Key (server-side)      | Stripe Dashboard > Developers > API keys                |
+| `STRIPE_WEBHOOK_SECRET`         | Stripe Webhook Signing Secret        | Stripe Dashboard > Developers > Webhooks                |
+| `STRIPE_PRICE_ID`               | Stripe Price ID (subscription price) | Stripe Dashboard > Products > Prices                    |
+
+### Environment Variables Example
+
+`.env.local` file:
+
+```env
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+# OpenAI Configuration
+OPENAI_API_KEY=sk-...
+
+# Stripe Configuration
+STRIPE_SECRET_KEY=sk_test_xxxxx
+STRIPE_WEBHOOK_SECRET=whsec_xxxxx
+STRIPE_PRICE_ID=price_xxxxx
+```
+
+⚠️ **Important**: Do not commit the `.env.local` file to Git. It is included in `.gitignore`.
+
+## Project Structure
+
+```
+danbi-ai/
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── (auth)/            # Authentication pages
+│   │   ├── (dashboard)/       # Dashboard pages
+│   │   └── api/              # API Routes
+│   ├── components/            # React components
+│   │   ├── ui/               # shadcn/ui components
+│   │   ├── auth/             # Authentication components
+│   │   ├── deck/             # Deck components
+│   │   ├── card/             # Card components
+│   │   ├── study/            # Study session components
+│   │   └── stats/            # Statistics components
+│   └── lib/                   # Utilities and libraries
+│       ├── supabase/         # Supabase setup and queries
+│       ├── sm2/              # SM-2 algorithm implementation
+│       ├── ai/               # OpenAI integration
+│       └── utils/            # Utility functions
+├── supabase/
+│   └── migrations/           # Database migrations
+└── public/                   # Static files
+```
+
+## Build and Deployment
+
+### Production Build
+
+```bash
+pnpm build
+```
+
+### Run Production Server
+
+```bash
+pnpm start
+```
+
+### Deploy to Vercel
+
+1. Import project to [Vercel](https://vercel.com)
+2. Set environment variables
+3. Deploy
+
+For more details, refer to the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying).
+
+## License
+
+This project is a private project.
+
+## Support
+
+If you encounter any issues, please create an Issue.
